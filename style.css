@@ -9,8 +9,10 @@ body{
 
 h1{
     font-family: "Audiowide", sans-serif;
+    color: #255773;
     text-align: center;
     font-size: 120px;
+    text-shadow: 2px 2px 8px #969292;
 }
 
 /*background:*/
