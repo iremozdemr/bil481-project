@@ -6,5 +6,12 @@ body{
     height:100%;
     width:100%;
 }
+
+h1{
+    font-family: "Audiowide", sans-serif;
+    text-align: center;
+    font-size: 120px;
+}
+
 /*background:*/
 /*https://mixkit.co/free-stock-video/clouds-and-blue-sky-background-2408/*/
