@@ -1,3 +1,10 @@
-html{
-    
+body{
+    background-image:url('background.mp4');
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height:100%;
+    width:100%;
 }
+/*background:*/
+/*https://mixkit.co/free-stock-video/clouds-and-blue-sky-background-2408/*/
