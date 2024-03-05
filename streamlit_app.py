@@ -14,6 +14,40 @@ st.write('you selected:', option)
 # API endpoint URL
 url = "https://api.adsb.lol/v2/ladd"
 
+response = requests.get(url)
+
+# Yanıtı kontrol etme
+if response.status_code == 200:
+    # Yanıtı JSON formatına dönüştürme
+    data = response.json()
+
+    # Uçaklar listesini alma
+    aircrafts = data.get("ac", [])
+
+    # Uçakların enlem ve boylam bilgilerini saklayacak boş listeler oluşturalım
+    latitudes = []
+    longitudes = []
+
+    # Her bir uçak için enlem ve boylam bilgilerini alıp listelere ekleyelim
+    for aircraft in aircrafts:
+        lat = aircraft.get("lat", 0)
+        lon = aircraft.get("lon", 0)
+        latitudes.append(lat)
+        longitudes.append(lon)
+
+    # Scatter plot oluşturma
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.scatter(longitudes, latitudes, marker='o', color='blue')
+    ax.set_xlabel('Boylam')
+    ax.set_ylabel('Enlem')
+    ax.set_title('Uçakların Konumu')
+    ax.grid(True)
+    
+    # Matplotlib figürünü Streamlit'te gösterme
+    st.pyplot(fig)
+else:
+    st.error("API'ye erişimde bir hata oluştu. Hata kodu:" + str(response.status_code))
+
 @st.cache_data(ttl=10)  # 10 saniye cache süresi
 def get_aircraft_data():
     # GET isteği gönderme
