@@ -18,8 +18,13 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
 
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+
     <title>our bil481 project</title>
 </head>
+<py-script>
+    print("hello world")  
+</py-script>
 <body>
     <h1 class="animate__animated animate__tada animate__repeat-2">
         OUR BIL481 PROJECT
@@ -29,34 +34,9 @@
         <!-- Python kodunun çıktıları buraya gelecek -->
     </div>
 
-    <script>
-        function fetchFlightInfo() {
-            fetch('https://api.adsbexchange.com/json/lat/40.7128/lon/-74.0060/20/')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('API isteği başarısız.');
-                }
-                return response.json();
-            })
-            .then(data => {
-                let flightInfo = "";
-                data.forEach(aircraft => {
-                    let flight = aircraft.callsign || "Bilinmiyor";
-                    let lat = aircraft.lat || 0;
-                    let lon = aircraft.lon || 0;
-                    let alt = aircraft.alt_baro || 0;
-                    flightInfo += `Uçuş: ${flight}, Enlem: ${lat}, Boylam: ${lon}, Yükseklik: ${alt}<br>`;
-                });
-                document.getElementById("flightInfo").innerHTML = flightInfo;
-            })
-            .catch(error => {
-                console.error('API isteği sırasında hata oluştu:', error);
-                document.getElementById("flightInfo").innerHTML = "API'ye erişimde bir hata oluştu.";
-            });
-        }
+   
 
-        window.onload = fetchFlightInfo;
-    </script>
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
 </body>
 </html>
 
