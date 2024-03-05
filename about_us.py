@@ -10,7 +10,7 @@ if add_selectbox == "About us":
     subprocess.Popen(["streamlit", "run", "about_us.py"])
 elif add_selectbox == "Main page":
     # Display content for the main page here
-    subprocess.Popen(["streamlit", "run", "sidebar.py"])
+    subprocess.Popen(["streamlit", "run", "streamlit_app.py"])
     st.write("This is the Main page.")
 
 
@@ -42,4 +42,3 @@ elif character == "Nisa Eylül Çintiriz":
     st.write("Text for Nisa Eylül Çintiriz")
 elif character == "Tuna Kodal":
     st.write("Text for Tuna Kodal")
-
