@@ -1,7 +1,6 @@
 import streamlit as st
 import webbrowser
 
-
 def about_us_content(page):
     if page == "About us":
         st.title("About Us")

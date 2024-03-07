@@ -1,6 +1,5 @@
 import requests
 
-
 # Örnek olarak tanımlanan enlem, boylam, yarıçap değerleri
 lat = 39.28923
 lon = 35.324
