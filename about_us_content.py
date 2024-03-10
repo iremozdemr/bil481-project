@@ -19,21 +19,28 @@ def about_us_content(page):
         character = st.selectbox("Choose your character from the list above", lst)
 
         if character == "Hüseyin Arda Tuz":
-            st.write("Text for Hüseyin Arda Tuz")
-        elif character == "İrem Özdemir":
-            st.write("Text for İrem Özdemir")
-        elif character == "Kayrahan Toprak Tosun":
-            st.write("Text for Kayrahan Toprak Tosun")
-        elif character == "Nisa Eylül Çintiriz":
-            st.write("I'm Nisa Eylül Çintiriz and here is my Linkedin")
+            st.write("I'm Hüseyin Arda Tuz and here is my contact info.")
             if st.button("Linkedin"):
-               webbrowser.open("http://www.example.com")
-            
+               webbrowser.open("https://www.linkedin.com/in/hüseyin-arda-tuz-a0a773254/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app")
+        elif character == "İrem Özdemir":
+            st.write("I'm İrem Özdemir and here is my contact info.")
+            if st.button("Linkedin"):
+               webbrowser.open("https://www.linkedin.com/in/irem-ozdmr/")
+        elif character == "Kayrahan Toprak Tosun":
+            st.write("I'm Kayrahan Toprak Tosun and here is my contact info.")
+            if st.button("Linkedin"):
+               webbrowser.open("https://www.linkedin.com/in/kayrahantosun/")
+        elif character == "Nisa Eylül Çintiriz":
+            st.write("I'm Nisa Eylül Çintiriz and here is my contact info.")
+            if st.button("Linkedin"):
+               webbrowser.open("https://www.linkedin.com/in/eyllcintiriz/")   
         elif character == "Tuna Kodal":
-            st.write("Text for Tuna Kodal")
+            st.write("I'm Tuna Kodal and here is my contact info.")
+            if st.button("Linkedin"):
+               webbrowser.open("https://www.linkedin.com/in/tuna-kodal-15514a231/")   
     elif page == "Main page":
-        st.title("Main Page")
-        st.write("This is the Main page content.")
+        st.title("")
+        st.write("")
 
 def about_our_project(page):
     if page == "About our project":
