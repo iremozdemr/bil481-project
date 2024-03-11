@@ -9,7 +9,7 @@ from about_us_content import about_us_content
 from about_us_content import about_our_project
 
 st.sidebar.title("Navigation")
-page = st.sidebar.selectbox("Select Page", ("About us","About our project", "Main page"))
+page = st.sidebar.selectbox("Select Page", ("Main page","About us","About our project"))
 
 about_us_content(page)
 about_our_project(page)
