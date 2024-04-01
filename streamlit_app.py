@@ -37,7 +37,7 @@ if page == "Main page":
 
     option = st.selectbox('Please choose the country for flight information: (Please wait for "World" to load before '
                           'choosing)', ('World', 'New York', 'Washington',
-                                        'Los Angeles', 'Istanbul', 'Roma',
+                                        'Los Angeles', 'Istanbul', 'Ankara', 'Roma',
                                         'Berlin'))
 
     st.write('You selected:', option)
@@ -46,7 +46,7 @@ if page == "Main page":
     GetFromAPI.load_flight_data()
     longitude, latitude = assign_data()
     altitude = DataManipulation.get_altitudes()
-    time_passed = 1
+    time_passed = 0
 
     if option == 'World':
         # Loads data for whole world
@@ -72,10 +72,10 @@ if page == "Main page":
 
     # Create second plot
     fig2, ax2 = plt.subplots(figsize=(10, 6))
-    scatter2 = ax2.scatter(time_passed, altitude, marker='x', color='red')
-    ax2.set_xlabel('Time')
-    ax2.set_ylabel('Altitude')
-    ax2.set_title('Average altitude over time')
+    # scatter2 = ax2.scatter(time_passed, altitude, marker='x', color='red')
+    ax2.set_xlabel('Zaman (sn)')
+    ax2.set_ylabel('Rakım')
+    ax2.set_title('Zamana Bağlı Ortalama Rakım')
     ax2.grid(True)
 
     # Show MatPlotLib Figure on Streamlit
@@ -84,7 +84,6 @@ if page == "Main page":
 
     with figure_container2:
         st.pyplot(fig2)
-
 
     # First map creation
     df = pd.DataFrame({'latitude': latitude, 'longitude': longitude})
@@ -128,6 +127,8 @@ if page == "Main page":
 
     map_widget = st.pydeck_chart(map_chart)
 
+    time_sleep = 5
+
     while True:
         print(option)
 
@@ -137,7 +138,7 @@ if page == "Main page":
         if option == 'World':
             # Loads data for whole world
             GetFromAPI.load_flight_data()
-            time.sleep(5)
+            time.sleep(time_sleep)
             longitude, latitude = assign_data()
             altitude = DataManipulation.get_altitudes()
             map_view.zoom = 1
@@ -152,12 +153,12 @@ if page == "Main page":
 
             # Update second plot
             ax2.scatter(time_passed, altitude, marker='x', color='red')
-            time_passed = time_passed + 1
+            time_passed = time_passed + time_sleep
 
         else:
             # Loads data using city name
             GetFromAPI.load_precise_data(option)
-            time.sleep(5)
+            time.sleep(time_sleep)
             longitude, latitude = assign_data()
             altitude = DataManipulation.get_altitudes()
             map_view.zoom = 9
@@ -170,7 +171,7 @@ if page == "Main page":
 
             # Update second plot
             ax2.scatter(time_passed, altitude, marker='x', color='red')
-            time_passed = time_passed + 1
+            time_passed = time_passed + time_sleep
 
         with figure_container:
             # figure_container.empty()

@@ -2,3 +2,4 @@ pandas_ta
 pandas
 streamlit
 matplotlib
+math
