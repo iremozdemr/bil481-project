@@ -1,6 +1,3 @@
-# This file is used to get flight data from the public API and output the information in json file format which are to
-# be used in other modules of this project
-
 import json
 import requests
 import time
@@ -15,25 +12,18 @@ RadiusDict = {'New York': 61.555075594, 'Washington': 26.9978401728, 'Los Angele
               'Istanbul': 18.898488121, 'Roma': 10.7991360691, 'Berlin': 16.7386609071}
 
 
+def write_data_to_json(data):
+    with open('flight_data.json', 'w') as flight_data:
+        json.dump(data, flight_data, indent=4)
+
+
 def load_flight_data():
-    # API endpoint URL
     url = "https://api.adsb.lol/v2/ladd"
-
-    # Response from server
     response = requests.get(url)
-
-    # Check if HTTP response is 200(Successful)
     if response.status_code == 200:
-
-        # Convert data to json format
         data = response.json()
-
-        # Dumps data to json file
-        with open('flight_data.json', 'w') as flight_data:
-            json.dump(data, flight_data, indent=4)
-            time.sleep(3)
+        write_data_to_json(data)
         return True
-
     else:
         print("There was an error while fetching data")
         return False
@@ -43,20 +33,11 @@ def load_precise_data(city_name):
     lat = LatitudeDict.get(city_name)
     lon = LongitudeDict.get(city_name)
     radius = round(RadiusDict.get(city_name))
-
-    # Endpoint url
     url = f"https://api.adsb.lol/v2/point/{lat}/{lon}/{radius}"
-
-    # Send GET request
     response = requests.get(url)
-
-    # Check the answer
     if response.status_code == 200:
         data = response.json()
-
-        with open('flight_data.json', 'w') as flight_data:
-            json.dump(data, flight_data)
-            time.sleep(3)
+        write_data_to_json(data)
         return True
     elif response.status_code == 422:
         print(response.json())
