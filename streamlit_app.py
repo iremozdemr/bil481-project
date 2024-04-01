@@ -1,3 +1,4 @@
+import matplotlib.pyplot
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -59,6 +60,7 @@ if page == "Main page":
         radius = 1000
 
     figure_container = st.empty()
+    figure_container2 = st.empty()
 
     # Create initial scatter plot
     fig, ax = plt.subplots(figsize=(10, 6))
@@ -68,9 +70,21 @@ if page == "Main page":
     ax.set_title('Uçakların Konumu')
     ax.grid(True)
 
+    # Create second plot
+    fig2, ax2 = plt.subplots(figsize=(10, 6))
+    scatter2 = ax2.scatter(time_passed, altitude, marker='x', color='red')
+    ax2.set_xlabel('Time')
+    ax2.set_ylabel('Altitude')
+    ax2.set_title('Average altitude over time')
+    ax2.grid(True)
+
     # Show MatPlotLib Figure on Streamlit
     with figure_container:
         st.pyplot(fig)
+
+    with figure_container2:
+        st.pyplot(fig2)
+
 
     # First map creation
     df = pd.DataFrame({'latitude': latitude, 'longitude': longitude})
@@ -125,17 +139,27 @@ if page == "Main page":
             GetFromAPI.load_flight_data()
             time.sleep(5)
             longitude, latitude = assign_data()
+            altitude = DataManipulation.get_altitudes()
             map_view.zoom = 1
             map_view.max_zoom = 1
             map_view.min_zoom = 1
             map_view.latitude = 0
             map_view.longitude = 0
 
+            # Update scatter plot data
+            scatter.remove()
+            scatter = ax.scatter(longitude, latitude, marker='o', color='blue')
+
+            # Update second plot
+            ax2.scatter(time_passed, altitude, marker='x', color='red')
+            time_passed = time_passed + 1
+
         else:
             # Loads data using city name
             GetFromAPI.load_precise_data(option)
             time.sleep(5)
             longitude, latitude = assign_data()
+            altitude = DataManipulation.get_altitudes()
             map_view.zoom = 9
             map_view.max_zoom = 9
             map_view.min_zoom = 9
@@ -144,9 +168,16 @@ if page == "Main page":
             scatter.remove()
             scatter = ax.scatter(longitude, latitude, marker='o', color='blue')
 
+            # Update second plot
+            ax2.scatter(time_passed, altitude, marker='x', color='red')
+            time_passed = time_passed + 1
+
         with figure_container:
             # figure_container.empty()
             figure_container.pyplot(fig)
+
+        with figure_container2:
+            figure_container2.pyplot(fig2)
 
         # Update map data
         df = pd.DataFrame({'latitude': latitude, 'longitude': longitude})
