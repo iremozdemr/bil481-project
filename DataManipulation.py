@@ -2,7 +2,8 @@
 # and formats the data so that it is ready to use in other modules
 
 import json
-import GetFromAPI
+import math
+
 
 def get_latitudes():
     # Open the json file
@@ -18,6 +19,27 @@ def get_latitudes():
         lat = aircraft.get("lat", 0)
         latitudes.append(lat)
     return latitudes
+
+
+def get_altitudes():
+    # Open the json file
+    with open('flight_data.json', 'r') as loaded_data:
+        # Load the data to a variable
+        data = json.load(loaded_data)
+
+    # Get the flights
+    aircrafts = data.get("ac", [])
+
+    # Total altitude and aircraft amount
+    aircraft_amount = 0
+    total_altitude = 0
+
+    for aircraft in aircrafts:
+        alt = aircraft.get("alt_baro", 0)
+        if isinstance(alt, int):
+            total_altitude = total_altitude + alt
+            aircraft_amount = aircraft_amount + 1
+    return math.floor(total_altitude / aircraft_amount)
 
 
 def get_longitudes():
