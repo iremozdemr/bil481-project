@@ -44,6 +44,8 @@ if page == "Main page":
     # First iteration
     GetFromAPI.load_flight_data()
     longitude, latitude = assign_data()
+    altitude = DataManipulation.get_altitudes()
+    time_passed = 1
 
     if option == 'World':
         # Loads data for whole world
@@ -121,15 +123,18 @@ if page == "Main page":
         if option == 'World':
             # Loads data for whole world
             GetFromAPI.load_flight_data()
+            time.sleep(5)
             longitude, latitude = assign_data()
             map_view.zoom = 1
             map_view.max_zoom = 1
             map_view.min_zoom = 1
             map_view.latitude = 0
             map_view.longitude = 0
+
         else:
             # Loads data using city name
             GetFromAPI.load_precise_data(option)
+            time.sleep(5)
             longitude, latitude = assign_data()
             map_view.zoom = 9
             map_view.max_zoom = 9
@@ -149,5 +154,3 @@ if page == "Main page":
 
         # Trigger rerun to update plot
         map_widget.pydeck_chart(map_chart)
-
-        time.sleep(5)
