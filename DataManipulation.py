@@ -39,7 +39,11 @@ def get_altitudes():
         if isinstance(alt, int):
             total_altitude = total_altitude + alt
             aircraft_amount = aircraft_amount + 1
-    return math.floor(total_altitude / aircraft_amount)
+
+    if aircraft_amount != 0:
+        return math.floor(total_altitude / aircraft_amount)
+    else:
+        return 0
 
 
 def get_longitudes():
